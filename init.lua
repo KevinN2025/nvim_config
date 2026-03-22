@@ -27,6 +27,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 -- =====================
 -- Plugin Setup (Lazy)
 -- =====================
@@ -46,25 +47,65 @@ require("lazy").setup({
         },
         filter = "machine", -- options: classic | octagon | pro | machine | ristretto | spectrum
       })
-      vim.cmd("colorscheme monokai-pro")
+--      vim.cmd("colorscheme monokai-pro")
     end,
   },
 
-  -- Statusline
   {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("lualine").setup({
-        options = {
-          theme = "monokai-pro",
-          icons_enabled = true,
-          section_separators = "",
-          component_separators = "",
-        },
-      })
-    end,
-  },
+  "nvim-lualine/lualine.nvim",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    require("lualine").setup({
+      options = {
+       -- theme = "ashen",
+        icons_enabled = true,
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "│", right = "│" },
+        globalstatus = true,
+      },
+
+      sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff" },
+        lualine_c = { "filename" },
+
+        lualine_x = { "encoding", "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+      },
+
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { "filename" },
+        lualine_x = { "location" },
+        lualine_y = {},
+        lualine_z = {},
+      },
+    })
+  end,
+},
+
+{
+  "lewis6991/gitsigns.nvim",
+  config = function()
+    require("gitsigns").setup()
+  end,
+},
+
+  -- Ashen colorscheme
+{
+  "ficcdaf/ashen.nvim",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require("ashen").setup({
+      transparent = true,
+      italic_comments = true,
+    })
+    vim.cmd("colorscheme ashen")
+  end,
+},
 
   -- Treesitter
   {
