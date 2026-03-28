@@ -18,8 +18,10 @@ return {
           "clangd",
           "jdtls",
           "basedpyright",
+          "intelephense",
           "lua_ls",
         },
+        automatic_enable = false,
       })
     end,
   },
