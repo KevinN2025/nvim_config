@@ -3,7 +3,7 @@ return {
     "loctvl842/monokai-pro.nvim",
     config = function()
       require("monokai-pro").setup({
-        transparent_background = true,
+        transparent_background = false,
         terminal_colors = true,
         styles = {
           comment = { italic = true },
